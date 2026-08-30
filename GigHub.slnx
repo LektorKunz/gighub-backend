@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="GigHub.Api.Tests/GigHub.Api.Tests.csproj" />
+  <Project Path="GigHub.Api/GigHub.Api.csproj" />
+</Solution>

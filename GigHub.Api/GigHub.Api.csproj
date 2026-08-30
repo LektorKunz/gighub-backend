@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>GigHub.Api</RootNamespace>
+    <UserSecretsId>gighub-api-facit-3-semester</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--
+      Pakkelisten matcher præcis design-brief.md afsnit 3. Versionsnumrene er sat ud fra
+      .NET 10/EF Core 10-serien, men er IKKE verificeret i dette miljø (ingen NuGet-adgang,
+      se README.md øverst) - kør `dotnet restore` og ret evt. version, hvis den ikke findes.
+    -->
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0" />
+    <PackageReference Include="Scalar.AspNetCore" Version="2.1.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.0" />
+  </ItemGroup>
+
+</Project>
