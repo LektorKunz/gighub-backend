@@ -69,7 +69,7 @@ builder.Services.AddCors(options =>
     // CORS-fejl ser ud i Network-fanen, FØR den rammer, så den ikke fejltolkes som "API'et er nede".
     options.AddPolicy("AngularDev", policy =>
     {
-        policy.WithOrigins("http://localhost:4200")
+        policy.WithOrigins("http://10.201.1.220",  "http://10.201.1.221")
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
