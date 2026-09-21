@@ -72,7 +72,7 @@ builder.Services.AddCors(options =>
         policy.WithOrigins(
                 "http://10.201.1.220",
                 "http://10.201.1.221",
-                "backend")
+                "http://localhost:4200")
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
@@ -111,7 +111,7 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference(); // Scalar UI tilgængelig på /scalar/v1 i udvikling
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 // Servererer wwwroot/uploads/events/... offentligt - det er her billeder uploadet via
 // POST /api/events/{id}/image (gang 08) bliver tilgængelige fra.

@@ -1,8 +1,15 @@
 services:
   backend:
     image: gighub-backend:latest
-    ports: ["5080:8080"]
+    ports: ["8080:8080"]
+    networks:
+      - gighub_net
   frontend:
     image: gighub-frontend:latest
     ports: ["4200:80"]
+    networks:
+      - gighub_net
     depends_on: ["backend"]
+
+networks:
+  gighub_net:
