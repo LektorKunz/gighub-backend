@@ -69,13 +69,22 @@ builder.Services.AddCors(options =>
     // CORS-fejl ser ud i Network-fanen, FØR den rammer, så den ikke fejltolkes som "API'et er nede".
     options.AddPolicy("AngularDev", policy =>
     {
-        policy.WithOrigins("http://10.201.1.220",  "http://10.201.1.221")
+        policy.WithOrigins(
+                "http://10.201.1.220",
+                "http://10.201.1.221",
+                "backend")
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
 });
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<GighubDbContext>();
+    db.Database.Migrate();
+}
 
 // ------------------------------------------------------------------------
 // Seed database ved opstart (kun i Development - i produktion bør migrations køres eksplicit
