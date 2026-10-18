@@ -132,11 +132,27 @@ public class EventsController : ControllerBase
             bookedCount, averageRating, reviews.Count, reviews, myBookingStatus, isFavorite));
     }
 
-    /// <summary>POST /api/events - kun Arrangør/Admin. ArrangoerId sættes fra JWT'et, aldrig fra request-body.</summary>
+    /// <summary>
+    /// POST /api/events - åbent for alle. ArrangoerId sættes fra JWT'et, aldrig fra request-body;
+    /// uden login ejes eventet af den første Admin-bruger, da ArrangoerId er en påkrævet FK.
+    /// </summary>
     [HttpPost]
     public async Task<ActionResult<EventDto>> CreateEvent(EventCreateDto dto, CancellationToken ct)
     {
-        var userId = User.GetUserId();
+        var isLoggedIn = User.TryGetUserId(out var userId);
+        var arrangoerName = User.Identity?.Name ?? string.Empty;
+
+        if (!isLoggedIn)
+        {
+            var admin = await _context.Users
+                .Where(u => u.Role == UserRole.Admin)
+                .OrderBy(u => u.Id)
+                .Select(u => new { u.Id, u.Name })
+                .FirstOrDefaultAsync(ct)
+                ?? throw new ConflictException("Der findes ingen Admin-bruger til at eje anonyme events.");
+            userId = admin.Id;
+            arrangoerName = admin.Name;
+        }
 
         var gigEvent = new Event
         {
@@ -154,10 +170,6 @@ public class EventsController : ControllerBase
 
         _context.Events.Add(gigEvent);
         await _context.SaveChangesAsync(ct);
-
-        // ClaimTypes.Name-claim'et (sat i AuthService.GenerateAuthResponse) læses automatisk
-        // ind i User.Identity.Name af JWT-middlewaren.
-        var arrangoerName = User.Identity?.Name ?? string.Empty;
 
         var result = new EventDto(gigEvent.Id, gigEvent.Title, gigEvent.Description, gigEvent.Genre,
             gigEvent.VenueName, gigEvent.Address, gigEvent.DateTimeUtc, gigEvent.Capacity,
