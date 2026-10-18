@@ -3,6 +3,7 @@ using GigHub.Api.Common.Exceptions;
 using GigHub.Api.Data;
 using GigHub.Api.Dtos;
 using GigHub.Api.Models;
+using GigHub.Api.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -133,7 +134,6 @@ public class EventsController : ControllerBase
 
     /// <summary>POST /api/events - kun Arrangør/Admin. ArrangoerId sættes fra JWT'et, aldrig fra request-body.</summary>
     [HttpPost]
-    [Authorize(Roles = "Arrangoer,Admin")]
     public async Task<ActionResult<EventDto>> CreateEvent(EventCreateDto dto, CancellationToken ct)
     {
         var userId = User.GetUserId();

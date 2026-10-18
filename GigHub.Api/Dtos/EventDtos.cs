@@ -59,21 +59,21 @@ public record EventDetailDto(
     bool IsFavorite);
 
 public record EventCreateDto(
-    [property: Required, MaxLength(200)] string Title,
-    [property: Required, MaxLength(2000)] string Description,
+    [Required, MaxLength(200)] string Title,
+    [Required, MaxLength(2000)] string Description,
     EventGenre Genre,
-    [property: Required, MaxLength(200)] string VenueName,
-    [property: Required, MaxLength(300)] string Address,
+    [Required, MaxLength(200)] string VenueName,
+    [Required, MaxLength(300)] string Address,
     DateTime DateTimeUtc,
-    [property: Range(1, 100_000)] int Capacity,
+    [Range(1, 100_000)] int Capacity,
     string? ImageUrl);
 
 public record EventUpdateDto(
-    [property: Required, MaxLength(200)] string Title,
-    [property: Required, MaxLength(2000)] string Description,
+    [Required, MaxLength(200)] string Title,
+    [Required, MaxLength(2000)] string Description,
     EventGenre Genre,
-    [property: Required, MaxLength(200)] string VenueName,
-    [property: Required, MaxLength(300)] string Address,
+    [Required, MaxLength(200)] string VenueName,
+    [Required, MaxLength(300)] string Address,
     DateTime DateTimeUtc,
-    [property: Range(1, 100_000)] int Capacity,
+    [Range(1, 100_000)] int Capacity,
     string? ImageUrl);

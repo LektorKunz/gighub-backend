@@ -45,6 +45,7 @@ var jwtKey = builder.Configuration["Jwt:Key"]
         "Jwt:Key mangler i appsettings.json. Se README.md - i en rigtig deployment bør denne " +
         "komme fra dotnet user-secrets/miljøvariabler, ikke fra en fil, der committes til git.");
 
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
