@@ -31,8 +31,9 @@ builder.Services.AddOpenApi();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' mangler i appsettings.json.");
-
-builder.Services.AddDbContext<GighubDbContext>(options => options.UseSqlite(connectionString));
+Console.WriteLine($"Env: {builder.Environment.EnvironmentName}");
+Console.WriteLine($"CS: '{connectionString}'");
+builder.Services.AddDbContext<GighubDbContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 // Service-laget - se Services/-mappen. Scoped, fordi de bruger GighubDbContext (som selv er
 // Scoped) - samme levetid pr. HTTP-request som i alle andre "almindelige" ASP.NET Core-opsætninger.

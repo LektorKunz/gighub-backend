@@ -15,6 +15,8 @@
       se README.md øverst) - kør `dotnet restore` og ret evt. version, hvis den ikke findes.
     -->
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0" />
+    <PackageReference Include="Microting.EntityFrameworkCore.MySql" Version="10.0.13" />
+    <PackageReference Include="MySqlConnector" Version="2.6.2" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.3" />
     <PackageReference Include="Scalar.AspNetCore" Version="2.1.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.0" />
